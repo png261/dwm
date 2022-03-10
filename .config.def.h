@@ -70,6 +70,7 @@ static const char *termcmd[]  = { "st", NULL };
 /*
  * Xresources preferences to load at startup
  */
+
 ResourcePref resources[] = {
 		{ "normbgcolor",        STRING,  &normbgcolor },
 		{ "normbordercolor",    STRING,  &normbordercolor },
@@ -84,13 +85,12 @@ ResourcePref resources[] = {
 		{ "nmaster",          	INTEGER, &nmaster },
 		{ "resizehints",       	INTEGER, &resizehints },
 		{ "mfact",      	 	FLOAT,   &mfact },
-		{ "gappx",				INTEGER, &gappx },
 		{ "showsystray",		INTEGER, &showsystray },
+		{ "gappx",				INTEGER, &gappx },
 		{ "systraypinning",		INTEGER, &systraypinning },
 		{ "systrayonleft",		INTEGER, &systrayonleft },
 		{ "systrayspacing",		INTEGER, &systrayspacing },
 		{ "systraypinningfailfirst",		INTEGER, &systraypinningfailfirst },
-
 };
 
 static Key keys[] = {

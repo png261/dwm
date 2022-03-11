@@ -290,6 +290,9 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+
+/* xresouces change color on the fly */
+static char XRESOURCE_RELOAD_COMMAND[] = "xrdb ~/.Xresources";
 static void load_xresources(void);
 static void resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst);
 static void xrdb(const Arg *arg);
@@ -2787,6 +2790,7 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 void
 load_xresources(void)
 {
+	system(XRESOURCE_RELOAD_COMMAND);
 	Display *display;
 	char *resm;
 	XrmDatabase db;

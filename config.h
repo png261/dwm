@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#define TERMINAL "st"
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -35,9 +36,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-	{ "st",      NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "firefox", NULL,     NULL,           1 << 0,    0,          0,          -1,        -1 },
+	{ TERMINAL,      NULL,     NULL,           1 << 1,    0,          1,           0,        -1 },
+	{ "Chromium",NULL,     NULL,		   1 << 2,    0,          0,          -1,        -1 },
+	{ "Zathura", NULL,     NULL,           1 << 2,    0,          0,          -1,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -67,8 +69,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *dmenucmd[] = { "j4-dmenu-desktop", "--term",TERMINAL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -116,6 +118,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+	{ MODKEY,                       XK_r,     xrdb,           {.v = NULL } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },

@@ -1783,10 +1783,10 @@ setfullscreen(Client *c, int fullscreen)
 void
 setgaps(const Arg *arg)
 {
-	load_xresources();
-	if (arg->i == 9999)
+	if (arg->v == 0){
+		load_xresources();
 		selmon->gappx = gappx;
-
+	}
 	else if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
 		selmon->gappx = 0;
 	else
@@ -1910,7 +1910,8 @@ xrdb(const Arg *arg)
   for (i = 0; i < LENGTH(colors); i++)
                 scheme[i] = drw_scm_create(drw, colors[i], 3);
   focus(NULL);
-  arrange(NULL);
+  selmon->gappx=gappx;
+  arrange(selmon);
 }
 
 void
@@ -2829,6 +2830,7 @@ main(int argc, char *argv[])
 	XrmInitialize();
 	load_xresources();
 	setup();
+
 #ifdef __OpenBSD__
 	if (pledge("stdio rpath proc exec ps", NULL) == -1)
 		die("pledge");

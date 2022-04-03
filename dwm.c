@@ -77,6 +77,9 @@
 #define VERSION_MINOR               0
 #define XEMBED_EMBEDDED_VERSION (VERSION_MAJOR << 16) | VERSION_MINOR
 
+#define GAP_TOGGLE 9999 
+#define GAP_RESET -9999 
+
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel, SchemeStatus, SchemeTagsSel, SchemeTagsNorm, SchemeInfoSel, SchemeInfoNorm }; /* color schemes */
@@ -1771,12 +1774,19 @@ setfullscreen(Client *c, int fullscreen)
 void
 setgaps(const Arg *arg)
 {
-	if (arg->i == 9999){
-		load_xresources();
-	}else
-		gappx += arg->i;
+	switch(arg->i)
+	{
+		case GAP_TOGGLE:
+			gappx = 0;
+			break;
+		case GAP_RESET:
+			load_xresources();
+			break;
+		default:
+			gappx += arg->i;
+			gappx = (arg -> i == 0 || gappx < 0) ? 0 : gappx;
+	}
 
-	gappx = (arg -> i == 0 || gappx < 0) ? 0 : gappx;
 	selmon->gappx = gappx;
 	arrange(selmon);
 }

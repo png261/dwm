@@ -46,6 +46,7 @@ static const Rule rules[] = {
 	{ TERMINAL_CLASS,  NULL,     NULL,           1 << 1,    0,          1,           0,        -1 },
 	{ "Chromium",NULL,     NULL,		   1 << 2,    0,          0,          -1,        -1 },
 	{ "Zathura", NULL,     NULL,           1 << 2,    0,          0,          -1,        -1 },
+	{ "Anki", NULL,     NULL,           1 << 2,    0,          0,          -1,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -132,8 +133,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ Mod1Mask,                     XK_minus,  setgaps,        {.i = -1 } },
 	{ Mod1Mask,                     XK_equal,  setgaps,        {.i = +1 } },
-	{ Mod1Mask|ShiftMask,           XK_minus,  setgaps,        {.i = 0  } },
-	{ Mod1Mask|ShiftMask,           XK_equal,  setgaps,        {.i = 9999} },
+	{ Mod1Mask|ShiftMask,           XK_minus,  setgaps,        {.i = GAP_TOGGLE  } },
+	{ Mod1Mask|ShiftMask,           XK_equal,  setgaps,        {.i = GAP_RESET } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
